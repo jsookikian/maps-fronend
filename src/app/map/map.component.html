@@ -1,0 +1,36 @@
+
+<mat-grid-list cols="2" rowHeight="1:1">
+
+    <mat-grid-tile>
+        <mat-list dense style=" border: 1px solid darkgrey">
+            <mat-list-item *ngFor="let marker of markers">
+                <div class="mat-list-item-text">
+                    <h4>{{marker.lat}}, {{marker.lng}}</h4>
+                </div>
+                    </mat-list-item>
+        </mat-list>
+        <!--<virtual-scroll [items]="markers" (update)="viewPortItems = $event">
+            <list-item *ngFor="let item of viewPortItems" [item]="item">
+            </list-item>
+     </virtual-scroll>-->
+    </mat-grid-tile>
+
+
+    <mat-grid-tile>
+<ngui-map center="{{lat}}, {{lng}}" zoom="{{zoom}}" (mapClick)="mapClicked($event)">
+    <div *ngFor="let marker of markers; let i = index" [attr.data-index]="i" > 
+        <marker id="{{i}}" position="{{marker.lat}} , {{marker.lng}}" draggable="true" (click)="clicked(i)" (dragstart)="markerClicked($event, 'dragstart', i)" (dragend)="markerClicked($event, 'dragend', i)" >
+        <!--(positionChanged)="markerClicked($event, 'changed', i)" (cursorChanged)="markerClicked($event, 'changed', i)"-->
+        </marker>
+          <!--<info-window id="iw">
+            <div *ngIf="marker.display">
+                lat: {{ marker.lat }}, lng: {{ marker.lng }}
+            </div>
+            <button (click)="hideMarkerInfo($event)">Hide Info</button>
+        </info-window>-->
+    </div>
+</ngui-map>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
