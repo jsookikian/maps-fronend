@@ -36,25 +36,10 @@ export class MapComponent {
       'A'
     );
 
-    // let marker = new google.maps.Marker({
-    //     position: $event.locLatLng,
-    //     map: this.nguiMapComponent.map,
-    // });
-
     // marker.setVisible(true);
     this.markers.push(newMarker);
     // this.cd.detectChanges();
-    // let infoWindow = new google.maps.InfoWindow({
-    //   content: 'A',
-    //   position: $event.locLatLng
-    // });
 
-    // google.maps.event.addListener(newMarker, 'click', () => {
-    //   infoWindow.open(this.nguiMapComponent.map, newMarker);
-    // });
-    // var m = document.getElementById('0');
-
-    // console.log(this.markers);
   }
   
   onMarkerInit(marker) {
@@ -76,7 +61,7 @@ export class MapComponent {
             'A'
           );
           this.markers.splice(id, 1);
-          this.markers.push( newMarker);
+          this.markers.push(newMarker);
           // this.cd.detectChanges();
     }
     else {
