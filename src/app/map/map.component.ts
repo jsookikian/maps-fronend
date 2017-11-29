@@ -3,6 +3,7 @@ import { Component, ViewChild , Input} from '@angular/core';
 import { NguiMapComponent} from '@ngui/map';
 import { ApplicationRef } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import {POIListComponent} from '../poi-list/poi-list.component';
 
 @Component({
   selector: 'map',
@@ -33,7 +34,7 @@ export class MapComponent {
     var newMarker = new POI(
       lati,
       lngi,
-      'A'
+      'Placeholder'
     );
 
     // marker.setVisible(true);
@@ -60,11 +61,12 @@ export class MapComponent {
           console.log($event.latLng.lat() + "," + $event.latLng.lng());
 
           var lati = $event.target.internalPosition.lat();
-          var lngi = $event.target.internalPosition.lng()
+          var lngi = $event.target.internalPosition.lng();
+          var geo = new google.maps.Geocoder();
           var newMarker = new POI(
             lati,
             lngi,
-            'A'
+            'Placeholder'
           );
           this.markers.splice(id, 1);
           this.markers.push(newMarker);

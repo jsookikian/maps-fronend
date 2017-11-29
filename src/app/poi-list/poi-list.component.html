@@ -1,0 +1,22 @@
+<div *ngIf="markers?.length > 0">
+<mat-list dense flex style="overflow: auto; height: 400px; auto; flex-grow: 1; border: 2px solid darkgrey">
+    <mat-list-item *ngFor="let marker of markers">
+        <div class="mat-list-item-text" style="border: darkblue">
+            <h4 matLine>{{marker.label}}</h4>
+            <h4 matLine>{{marker.lat}}, {{marker.lng}}</h4>
+        </div>
+            </mat-list-item>
+</mat-list>
+</div>
+
+<!--<optimized-list [items]="markers" [itemHeight]="73" [offset]="2" (update)="optimizedList = $event">
+  <!-- It supports animations: -->
+  <!--<div  *ngFor="let marker of markers">
+    <strong>"{{marker.lat}}, {{marker.lng}}"</strong>
+  </div>
+</optimized-list>-->
+
+<!--<virtual-scroll [items]="markers" (update)="viewPortItems = $event">
+    <list-item *ngFor="let item of viewPortItems" [item]="item">
+    </list-item>
+</virtual-scroll>-->
