@@ -12,6 +12,7 @@ import {EditDialogComponent} from '../edit-dialog/edit-dialog.component';
 export class POIListComponent {
     @Input()
     markers:POI[] = [];
+    selected: any;
     dialogRef: MatDialogRef<EditDialogComponent>;
     // constructor(private popup:Popup){}
    constructor(public dialog: MatDialog) {}
@@ -23,12 +24,34 @@ export class POIListComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result.length > 0) {
+      console.log(`result:  ${result}`);
+      if (result === true) {
+        this.markers.splice(i, 1);
+        console.log("Marker " + i + " removed");
+      }
+      else if (result != "" && result !== "true") {
+        
         this.markers[i].label = result;
       }
+
     });
   }
+
+  isActive(i) {
+    return this.selected === i;
+  }
+  highlight(i) {
+    if (this.selected == i) {
+      console.log("marker" + i + " normal ");
+      
+      this.selected = null;
+    }
+    else {
+      console.log("marker" + i + " highlighted");
+
+      this.selected = i;
+
+    }
 }
 
 class POI{

@@ -2,26 +2,7 @@
 <mat-grid-list cols="2" rowHeight="1:1">
 
     <mat-grid-tile>
-        <!--<mat-list dense style=" border: 1px solid darkgrey">
-            <mat-list-item *ngFor="let marker of markers">
-                <div class="mat-list-item-text">
-                    <h4>{{marker.lat}}, {{marker.lng}}</h4>
-                </div>
-                    </mat-list-item>
-        </mat-list>-->
-          <!--<ul ngui-infinite-list  class="infinite-list" [disableScrollListener]="set1.loadingInProgress"
-     (endVisible)="loadMore(set1)">
-      <li *ngFor="let item of set1.list">{{item+1}}</li>
-      <div ngui-infinite-list-end>
-        <div *ngIf="set1.loadingInProgress">Loading</div>
-        <div *ngIf="set1.endOfList">End Of List</div>
-      </div>
-    </ul>-->
-        <!--<virtual-scroll [items]="markers" (update)="viewPortItems = $event">
-            <list-item *ngFor="let item of viewPortItems" [item]="item">
-            </list-item>
-     </virtual-scroll>-->
-     <poi-list [markers]="markers"></poi-list>
+     <poi-list [(markers)]="markers"></poi-list>
     </mat-grid-tile>
 
 
@@ -34,6 +15,9 @@
             (click)="clicked($event, i)"
             (dragstart)="markerClicked($event, 'dragstart', i)" 
             (dragend)="markerClicked($event, 'dragend', i)" 
+            (mouseover)="highlight($event, i)"
+            (mouseout)="highlight($event, i)"
+
             >
         <!--(positionChanged)="markerClicked($event, 'changed', i)" (cursorChanged)="markerClicked($event, 'changed', i)"-->
         </marker>

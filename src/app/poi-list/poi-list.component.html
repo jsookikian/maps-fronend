@@ -1,22 +1,21 @@
 <div *ngIf="markers?.length > 0">
 <mat-list dense flex style="overflow: auto; height: 400px; auto; flex-grow: 1; border: 2px solid darkgrey">
-    <mat-list-item *ngFor="let marker of markers let i = index" [attr.data-index]="i">
-            <button mat-icon-button tabindex="-1" (click)="editLabel($event, i)">edit</button>
-            <h4 matLine>{{marker.label}}</h4>
-            <h4 matLine>{{marker.lat}}, {{marker.lng}}</h4>
+    <div *ngFor="let marker of markers let i = index" [attr.data-index]="i" >
+    <mat-list-item  [ngClass]="{'active': isActive(i)}" class="mat-2-line" >
+             
+            <div (mouseover)="highlight(i)" class="mat-list-item-text">
+                <p matLine class="label">
+                    {{marker.label}}
+                </p>
+                <p matLine>
+                    {{marker.lat}}, {{marker.lng}}
+                </p>
+            </div>
+            <button class="edit-button" mat-icon-button tabindex="-1" (click)="editLabel($event, i)">edit</button>
+
     </mat-list-item>
+    <mat-divider></mat-divider>
+    </div>
+
 </mat-list>
 </div>
-
-
-<!--<optimized-list [items]="markers" [itemHeight]="73" [offset]="2" (update)="optimizedList = $event">
-  <!-- It supports animations: -->
-  <!--<div  *ngFor="let marker of markers">
-    <strong>"{{marker.lat}}, {{marker.lng}}"</strong>
-  </div>
-</optimized-list>-->
-
-<!--<virtual-scroll [items]="markers" (update)="viewPortItems = $event">
-    <list-item *ngFor="let item of viewPortItems" [item]="item">
-    </list-item>
-</virtual-scroll>-->

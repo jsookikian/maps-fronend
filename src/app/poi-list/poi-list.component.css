@@ -1,0 +1,15 @@
+label {
+    font-weight: bold
+}
+
+edit-button {
+    margin-right: auto;
+}
+
+.highlight {
+    background-color: lightgoldenrodyellow;
+}
+
+.active {    
+    background-color: lightgoldenrodyellow;
+}

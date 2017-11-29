@@ -12,6 +12,8 @@ import {POIListComponent} from '../poi-list/poi-list.component';
 })
 export class MapComponent {
   @ViewChild(NguiMapComponent) nguiMapComponent: NguiMapComponent
+  @ViewChild(POIListComponent) poiList: POIListComponent;
+
   title: string = 'My first AGM project';
   lat: number = 35.30087318661081;
   lng: number =  -120.66120503906859;
@@ -86,6 +88,10 @@ export class MapComponent {
           this.markers.push( newMarker);
           // this.cd.detectChanges(); 
     }
+  }
+
+  highlight($event, i) {
+    this.poiList.highlight(i);
   }
 
   markerDropped($event, eventName) {
