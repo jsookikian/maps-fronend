@@ -15,6 +15,7 @@ import {MapComponent} from './map.component';
     // POIListModule
   ],
   providers: [],
+  
   declarations: [ MapComponent],
   bootstrap: [ MapComponent ]
 })

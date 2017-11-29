@@ -9,8 +9,7 @@ import { MapModule} from '../map/map.module';
 import { MapComponent} from '../map/map.component';
 import { POIListComponent} from '../poi-list/poi-list.component';
 //  import { NguiInfiniteListModule } from '@ngui/infinite-list';
-import {OptimizedListModule} from '../optimized-list/optimized-list.module';
-// import { POIListModule} from '../poi-list/poi-list.module';
+import { EditDialogModule} from '../edit-dialog/edit-dialog.module';
 
 @NgModule({
   imports: [
@@ -18,7 +17,7 @@ import {OptimizedListModule} from '../optimized-list/optimized-list.module';
     HomeRoutingModule,
     AppMaterialModule,
     NguiMapModule,
-    OptimizedListModule,
+    EditDialogModule
     // NguiInfiniteListModule,
     // POIListModule
   ],

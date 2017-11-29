@@ -1,13 +1,13 @@
 <div *ngIf="markers?.length > 0">
 <mat-list dense flex style="overflow: auto; height: 400px; auto; flex-grow: 1; border: 2px solid darkgrey">
-    <mat-list-item *ngFor="let marker of markers">
-        <div class="mat-list-item-text" style="border: darkblue">
+    <mat-list-item *ngFor="let marker of markers let i = index" [attr.data-index]="i">
+            <button mat-icon-button tabindex="-1" (click)="editLabel($event, i)">edit</button>
             <h4 matLine>{{marker.label}}</h4>
             <h4 matLine>{{marker.lat}}, {{marker.lng}}</h4>
-        </div>
-            </mat-list-item>
+    </mat-list-item>
 </mat-list>
 </div>
+
 
 <!--<optimized-list [items]="markers" [itemHeight]="73" [offset]="2" (update)="optimizedList = $event">
   <!-- It supports animations: -->

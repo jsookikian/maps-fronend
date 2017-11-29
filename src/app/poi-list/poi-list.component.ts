@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { NguiMapModule} from '@ngui/map';
-import {OptimizedListComponent} from '../optimized-list/optimized-list.component';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {EditDialogComponent} from '../edit-dialog/edit-dialog.component';
+// import {EditDialog, EditDialogDialog} from '../map/confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'poi-list',
   templateUrl: 'poi-list.component.html',
@@ -11,8 +12,25 @@ import {OptimizedListComponent} from '../optimized-list/optimized-list.component
 export class POIListComponent {
     @Input()
     markers:POI[] = [];
- 
+    dialogRef: MatDialogRef<EditDialogComponent>;
+    // constructor(private popup:Popup){}
+   constructor(public dialog: MatDialog) {}
+
+    editLabel($event, i): void {
+    let dialogRef = this.dialog.open(EditDialogComponent, {
+      height: '200px',
+      data: { label: this.markers[i].label, lat: this.markers[i].lat, lng: this.markers[i].lat }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result.length > 0) {
+        this.markers[i].label = result;
+      }
+    });
+  }
 }
+
 class POI{
   public lat: number;
   public lng: number;
