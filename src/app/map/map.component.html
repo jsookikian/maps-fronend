@@ -20,18 +20,20 @@
 <ngui-map center="{{lat}}, {{lng}}" zoom="{{zoom}}" (mapClick)="mapClicked($event)">
     <div *ngFor="let marker of markers; let i = index" [attr.data-index]="i" > 
         <marker id="{{i}}" 
-            position="{{marker.lat}} , {{marker.lng}}" 
-            draggable="true" (click)="clicked(i)" 
+            position="loc: {{marker.lat}} , {{marker.lng}}" 
+            draggable="true" 
+            (click)="clicked($event, i)"
             (dragstart)="markerClicked($event, 'dragstart', i)" 
-            (dragend)="markerClicked($event, 'dragend', i)" >
+            (dragend)="markerClicked($event, 'dragend', i)" 
+            >
         <!--(positionChanged)="markerClicked($event, 'changed', i)" (cursorChanged)="markerClicked($event, 'changed', i)"-->
         </marker>
-          <!--<info-window id="iw">
+          <info-window id="iw">
             <div *ngIf="marker.display">
                 lat: {{ marker.lat }}, lng: {{ marker.lng }}
             </div>
             <button (click)="hideMarkerInfo($event)">Hide Info</button>
-        </info-window>-->
+        </info-window>
     </div>
 </ngui-map>
     </mat-grid-tile>

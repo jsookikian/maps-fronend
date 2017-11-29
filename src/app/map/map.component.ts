@@ -53,8 +53,14 @@ export class MapComponent {
     }
     else if (eventName == 'dragend') {
           console.log("drag end on " + id);
-          var lati = $event.latLng.lat();
-          var lngi = $event.latLng.lng()
+          console.log($event);
+
+          console.log($event.target.internalPosition.lat() + "," + $event.target.internalPosition.lng());
+          console.log($event.target.position.lat() + "," + $event.target.position.lng());
+          console.log($event.latLng.lat() + "," + $event.latLng.lng());
+
+          var lati = $event.target.internalPosition.lat();
+          var lngi = $event.target.internalPosition.lng()
           var newMarker = new POI(
             lati,
             lngi,
@@ -99,15 +105,20 @@ export class MapComponent {
     console.log($event);
   }
 
-  clicked(id) {
+  clicked(event, id) {
     console.log(id);
+    // console.log($event.target);
+
     // this.marker.lat = marker.getPosition().lat();
     // this.marker.lng = marker.getPosition().lng();
-    var mark = {
-      lat: this.markers[id].lat,
-      lng: this.markers[id].lng
-    };
-    if (confirm("Would you like to remove pin at Location:\n" + "Latitude: " +mark.lat +"\nLongitude: " + mark.lng)) {
+    // var mark = {
+    //   lat: this.markers[id].lat,
+    //   lng: this.markers[id].lng
+    // };
+
+    // this.nguiMapComponent.openInfoWindow('iw', $event.target.markers[id].anchorPoint);
+
+    if (confirm("Would you like to remove pin at Location:\n" + "Latitude: " +this.markers[id].lat +"\nLongitude: " + this.markers[id].lng)) {
       this.markers.splice(id, 1);
     }
   }
@@ -117,10 +128,11 @@ class POI{
   public lat: number;
   public lng: number;
   public label: string;
-
+  public display:boolean;
   constructor(lat, lng, label) {
     this.lat = lat;
     this.lng = lng;
     this.label = label;
+    this.display = true;
   }
 }
