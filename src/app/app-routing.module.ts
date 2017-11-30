@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import {HomeComponent} from './home/home/home.component';
-// import {CreateComponent} from './create/create.component';
+import {HomeComponent} from './home/home/home.component';
+import {CreateComponent} from './create/create/create.component';
 
 const routes: Routes = [
+  // {
+  //   path: '', loadChildren: './home/home.module#HomeModule'
+  // },
+  // {
+  //   path: 'create', loadChildren: './create/create.module#CreateModule'
+  // }
   {
-    path: '', loadChildren: './home/home.module#HomeModule'
+    path: '', component: HomeComponent
   },
   {
-    path: '', loadChildren: './create/create.module#CreateModule'
+    path: 'create', component: CreateComponent
   }
 ];
 

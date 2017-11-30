@@ -9,6 +9,7 @@ import { MapModule} from '../map/map.module';
 import { MapComponent} from '../map/map.component';
 import { POIListModule} from '../poi-list/poi-list.module';
 import { EditDialogModule} from '../edit-dialog/edit-dialog.module';
+import {ToolbarModule} from '../toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { EditDialogModule} from '../edit-dialog/edit-dialog.module';
     NguiMapModule,
     EditDialogModule,
     MapModule,
-    POIListModule
+    POIListModule,
+    ToolbarModule
   ],
   declarations: [CreateComponent]
 })

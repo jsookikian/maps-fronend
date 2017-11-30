@@ -14,6 +14,7 @@ import {HomeComponent} from  './home/home/home.component';
 import {HomeModule} from './home/home.module';
 import {CreateComponent} from './create/create/create.component';
 import {CreateModule} from './create/create.module';
+import {ToolbarModule} from './toolbar/toolbar.module';
 
 import { POIListComponent} from './poi-list/poi-list.component';
 import { MapComponent} from './map/map.component';
@@ -30,6 +31,7 @@ import { MapComponent} from './map/map.component';
     AppMaterialModule,
     HomeModule,
     CreateModule,
+    ToolbarModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDh6ycUao464kIs4oBtr5jhRn8ui_Gy1LU'})
   ],
 

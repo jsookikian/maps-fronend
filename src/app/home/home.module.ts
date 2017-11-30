@@ -11,7 +11,7 @@ import { POIListModule} from '../poi-list/poi-list.module';
 import { POIListComponent} from '../poi-list/poi-list.component';
 import { MapComponent} from '../map/map.component';
 import { EditDialogModule} from '../edit-dialog/edit-dialog.module';
-
+import {ToolbarModule} from '../toolbar/toolbar.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +20,7 @@ import { EditDialogModule} from '../edit-dialog/edit-dialog.module';
     NguiMapModule,
     EditDialogModule,
     MapModule,
+    ToolbarModule,
     // NguiInfiniteListModule,
     POIListModule
   ],

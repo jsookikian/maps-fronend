@@ -1,42 +1,4 @@
-<mat-toolbar color="primary">
-  <span>AR Maps Editor</span>
-</mat-toolbar>  
-
-<mat-toolbar color="primary">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <span>Menu</span>
-
-  <mat-menu #menu="matMenu">
-    
-    <button mat-menu-item routerLink="/">
-      <mat-icon >home</mat-icon>
-      <span>Home</span>
-    </button>
-
-    <button mat-menu-item disabled routerLink="/create">
-      <mat-icon>add</mat-icon>
-      <span>Create New Map</span>
-    </button>
-
-
-    <button mat-menu-item [matMenuTriggerFor]="myMaps"> 
-      <mat-icon>directions</mat-icon>
-      <span> My Maps </span>
-    </button>
-
-         
-
-      <mat-menu #myMaps="matMenu">
-        <button mat-menu-item>Map 1</button>
-        <button mat-menu-item>Map 2</button>
-        <button mat-menu-item>Map 3</button> 
-      </mat-menu>
-
-  </mat-menu>
-</mat-toolbar>
-
+<toolbar></toolbar>
 <mat-card class="example-card" flex>
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
