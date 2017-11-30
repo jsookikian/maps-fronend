@@ -1,21 +1,28 @@
 <div *ngIf="markers?.length > 0">
-<mat-list dense flex style="overflow: auto; height: 400px; auto; flex-grow: 1; border: 2px solid darkgrey">
+<mat-list dense flex class="poi-list">
     <div *ngFor="let marker of markers let i = index" [attr.data-index]="i" >
-    <mat-list-item  [ngClass]="{'active': isActive(i)}" class="mat-2-line" >
-             
-            <div (mouseover)="highlight(i)" class="mat-list-item-text">
-                <p matLine class="label">
-                    {{marker.label}}
-                </p>
-                <p matLine>
-                    {{marker.lat}}, {{marker.lng}}
-                </p>
-            </div>
-            <button class="edit-button" mat-icon-button tabindex="-1" (click)="editLabel($event, i)">edit</button>
+        <mat-list-item  [ngClass]="{'active': isActive(i)}" class="mat-2-line fill-box" layout="row"> 
+                <div (mouseover)="highlight(i)" class="mat-list-item-text">
+                    <p matLine class="label">
+                        {{marker.label}}
+                    </p>
+                    <p matLine>
+                        {{marker.lat}}, {{marker.lng}}
+                    </p>
+                </div>
+                <span flex></span>           
+                <button flex=5 class="edit-button" mat-icon-button style="opacity:1;"tabindex="-1" (click)="editLabel($event, i)">edit</button>
 
-    </mat-list-item>
-    <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-divider></mat-divider>
     </div>
 
 </mat-list>
 </div>
+
+<div *ngIf="markers?.length == 0">
+   <p> No Points of Interest Added.</p>
+   <p> Click on the map to add a Point of Interest </p>
+
+
+<div>

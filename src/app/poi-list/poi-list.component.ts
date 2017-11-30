@@ -50,8 +50,8 @@ export class POIListComponent {
       console.log("marker" + i + " highlighted");
 
       this.selected = i;
-
     }
+  } 
 }
 
 class POI{

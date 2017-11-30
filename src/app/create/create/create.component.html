@@ -9,13 +9,13 @@
   <span>Menu</span>
 
   <mat-menu #menu="matMenu">
-
-    <button mat-menu-item disabled routerLink="/">
+    
+    <button mat-menu-item routerLink="/">
       <mat-icon >home</mat-icon>
       <span>Home</span>
     </button>
-    
-    <button mat-menu-item routerLink="/create">
+
+    <button mat-menu-item disabled routerLink="/create">
       <mat-icon>add</mat-icon>
       <span>Create New Map</span>
     </button>
@@ -33,6 +33,7 @@
         <button mat-menu-item>Map 2</button>
         <button mat-menu-item>Map 3</button> 
       </mat-menu>
+
   </mat-menu>
 </mat-toolbar>
 
@@ -42,16 +43,14 @@
     <mat-card-title>Maps</mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
-  <!--<img mat-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">-->
   <mat-card-content>
-    </mat-card-content>
-      
+  <!--<img mat-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">-->
       <div flex layout="row">
          <mat-card-content style="border-color: darkgray" flex>
             <map></map>
          </mat-card-content>
-    </div>
-
+      </div>  
+  </mat-card-content>
   <mat-card-actions>
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>

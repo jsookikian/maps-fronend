@@ -11,7 +11,10 @@ import {
   MatListModule,
   MatGridListModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,7 +29,10 @@ import {
     MatListModule,
     MatGridListModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatExpansionModule
   ]
 })
 export class AppMaterialModule {}

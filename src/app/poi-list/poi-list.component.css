@@ -1,9 +1,11 @@
-label {
-    font-weight: bold
+.label {
+    font-weight: bold;
+    flex: 1 1 auto;
 }
 
-edit-button {
-    margin-right: auto;
+.edit-button {
+    float: right;
+    flex: 10 10 auto;
 }
 
 .highlight {
@@ -12,4 +14,17 @@ edit-button {
 
 .active {    
     background-color: lightgoldenrodyellow;
+}
+
+.poi-list {
+    overflow: auto; 
+    height: 400px;
+    width: 100%;
+    flex-grow: 1; 
+    border: 2px solid darkgrey;
+}
+
+.fill-box {
+    flex: 1 1 auto;
+
 }

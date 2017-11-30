@@ -16,5 +16,6 @@ import {EditDialogModule} from '../edit-dialog/edit-dialog.module';
   // entryComponents: [EditDialogComponent],
   declarations: [ POIListComponent],
   bootstrap: [ POIListComponent ],
+  exports: [POIListComponent]
 })
 export class POIListModule {}
