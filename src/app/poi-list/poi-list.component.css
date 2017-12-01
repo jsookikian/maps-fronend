@@ -1,11 +1,9 @@
 .label {
     font-weight: bold;
-    flex: 1 1 auto;
 }
 
 .edit-button {
     float: right;
-    flex: 10 10 auto;
 }
 
 .highlight {
@@ -17,14 +15,15 @@
 }
 
 .poi-list {
-    overflow: auto; 
-    height: 400px;
-    width: 100%;
-    flex-grow: 1; 
+    overflow: scroll; 
+    width: 250px;
+    height: 500px;
     border: 2px solid darkgrey;
 }
 
-.fill-box {
-    flex: 1 1 auto;
-
+.poi-row {
+    float: left;
+    text-align: left;
+    padding: 2px;
+    height: 50px;
 }

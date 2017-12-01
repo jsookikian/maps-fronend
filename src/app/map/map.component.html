@@ -1,12 +1,11 @@
 
-<mat-grid-list cols="2" rowHeight="1:1">
+<mat-grid-list cols="4" rowHeight="1:2">
 
-    <mat-grid-tile>
+    <mat-grid-tile id="poi-container" [colspan]="1">
      <poi-list [(markers)]="markers"></poi-list>
     </mat-grid-tile>
 
-
-    <mat-grid-tile>
+    <mat-grid-tile [colspan]="3">
 <ngui-map center="{{lat}}, {{lng}}" 
         zoom="{{zoom}}" 
         (mapClick)="mapClicked($event)"

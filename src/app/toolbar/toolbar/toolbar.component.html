@@ -1,41 +1,41 @@
 <mat-toolbar color="primary">
+  <mat-toolbar-row>
   <span>AR Maps Editor</span>
   <span class="fill-toolbar"></span>
   <span>
-  <button mat-button> My Account </button>
+  <button mat-raised-button color="primary" routerLink="/settings"> My Account </button>
   </span>
-</mat-toolbar>
+  </mat-toolbar-row>
 
-<mat-toolbar color="primary">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <span>Menu</span>
-
-  <mat-menu #menu="matMenu">
-
-    <button class="disabled" mat-menu-item routerLink="/">
-      <mat-icon >home</mat-icon>
-      <span>Home</span>
+  <mat-toolbar-row color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
     </button>
-    
-    <button mat-menu-item routerLink="/create" routerLinkActive #rla="routerLinkActive" >
-      <mat-icon>add</mat-icon>
-      <span>Create New Map</span>
-    </button>
+    <span>Menu</span>
+
+    <mat-menu #menu="matMenu">
+
+      <button class="disabled" mat-menu-item routerLink="/">
+        <mat-icon >home</mat-icon>
+        <span>Home</span>
+      </button>
+      
+      <button mat-menu-item routerLink="/create" routerLinkActive #rla="routerLinkActive" >
+        <mat-icon>add</mat-icon>
+        <span>Create New Map</span>
+      </button>
 
 
-    <button mat-menu-item [matMenuTriggerFor]="myMaps"> 
-      <mat-icon>directions</mat-icon>
-      <span> My Maps </span>
-    </button>
+      <button mat-menu-item [matMenuTriggerFor]="myMaps"> 
+        <mat-icon>directions</mat-icon>
+        <span> My Maps </span>
+      </button>
 
-         
-
-      <mat-menu #myMaps="matMenu">
-        <button mat-menu-item>Map 1</button>
-        <button mat-menu-item>Map 2</button>
-        <button mat-menu-item>Map 3</button> 
-      </mat-menu>
-  </mat-menu>
+        <mat-menu #myMaps="matMenu">
+          <button mat-menu-item>Map 1</button>
+          <button mat-menu-item>Map 2</button>
+          <button mat-menu-item>Map 3</button> 
+        </mat-menu>
+    </mat-menu>
+  </mat-toolbar-row>
 </mat-toolbar>

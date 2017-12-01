@@ -23,7 +23,7 @@ export class MapComponent {
   // lat: number = 128.84;
   // lng: number =  -25.76;  
   zoom: number = 16;
-
+  markerNumber = 1;
   constructor(private cd: ChangeDetectorRef) {}
 
   // public markers: [] = [];
@@ -47,22 +47,10 @@ export class MapComponent {
     let newMarker = new POI(
       lati,
       lngi,
-      'Placeholder',
+      "Label " + this.markerNumber++,
       null
     );
-    // let marker = new Marker(this.nguiMapComponent);
-    // marker.position = "loc: " + lati +"," + lngi;
-    // marker.initialize();
-    // marker.mapObject.setDraggable(true);
     this.markers.push(newMarker);
-    console.log(Object.keys(this.map));
-    // console.log(JSON.parse(JSON.stringify(this.map)));
-    console.log(this.map);
-
-    // console.log("markers", this.nguiMapComponent.markers);
-    
-    // this.cd.detectChanges();
-
   }
 
   onMapReady(map) {
@@ -90,16 +78,9 @@ export class MapComponent {
           let lati = $event.target.internalPosition.lat();
           let lngi = $event.target.internalPosition.lng();
           let geo = new google.maps.Geocoder();
-          // let newMarker = new POI(
-          //   lati,
-          //   lngi,
-          //   'Placeholder',
 
-          // );
           this.markers[id].lat = lati;
           this.markers[id].lng = lngi;
-
-          // this.cd.detectChanges();
     }
     else {
           // console.log("position changed " + id);
@@ -145,34 +126,11 @@ export class MapComponent {
 
   clicked($event, id) {
     console.log(id);
-    // let marker:google.maps.Marker = event.target;
-    // this.infoWindow = new google.maps.InfoWindow();
-    // let infoWindowOptions = 
-    //  " <h3>"  + this.markers[id].label + "</h3>" +
-    //  "<h4> Latitude: " +this.markers[id].lat + "</h4>" + 
-    //  "<h4> Longitude: " +this.markers[id].lng + "</h4>" +
-    //  "<button (click)=closeinfoWindow()>" + close + "</button>";
-    
-    // this.infoWindow.setContent(infoWindowOptions);
+    this.poiList.editLabel($event, id);
 
-    // console.log("marker: ", marker);
-    //  google.maps.event.addListener(marker, 'click', () => {
-    //   // infoWindow.setContent(content);
-    //   this.infoWindow.open(this.map, marker);
-    // });
-    // console.log($event.target);
-
-    // this.marker.lat = marker.getPosition().lat();
-    // this.marker.lng = marker.getPosition().lng();
-    // let mark = {
-    //   lat: this.markers[id].lat,
-    //   lng: this.markers[id].lng
-    // };
-
-    // this.map. openInfoWindow('iw-' + id, marker);
-    if (confirm("Would you like to remove pin at Location:\n" + "Latitude: " +this.markers[id].lat +"\nLongitude: " + this.markers[id].lng)) {
-      this.markers.splice(id, 1);
-    }
+    // if (confirm("Would you like to remove pin at Location:\n" + "Latitude: " +this.markers[id].lat +"\nLongitude: " + this.markers[id].lng)) {
+    //   this.markers.splice(id, 1);
+    // }
   }
 }
 

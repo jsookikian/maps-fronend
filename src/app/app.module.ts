@@ -18,9 +18,11 @@ import {ToolbarModule} from './toolbar/toolbar.module';
 
 import { POIListComponent} from './poi-list/poi-list.component';
 import { MapComponent} from './map/map.component';
+import { SettingsComponent } from './settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

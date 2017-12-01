@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { NguiMapModule} from '@ngui/map';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {EditDialogComponent} from '../edit-dialog/edit-dialog.component';
@@ -14,8 +14,11 @@ export class POIListComponent {
     markers:POI[] = [];
     selected: any;
     dialogRef: MatDialogRef<EditDialogComponent>;
+    @ViewChild('')
     // constructor(private popup:Popup){}
-   constructor(public dialog: MatDialog) {}
+   constructor(public dialog: MatDialog, private elRef: ElementRef) {}
+
+
 
     editLabel($event, i): void {
     let dialogRef = this.dialog.open(EditDialogComponent, {
@@ -29,8 +32,7 @@ export class POIListComponent {
         this.markers.splice(i, 1);
         console.log("Marker " + i + " removed");
       }
-      else if (result != "" && result !== "true") {
-        
+      else if (result.length > 0 && result !== "true") {
         this.markers[i].label = result;
       }
 
@@ -43,12 +45,11 @@ export class POIListComponent {
   highlight(i) {
     if (this.selected == i) {
       console.log("marker" + i + " normal ");
-      
+
       this.selected = null;
     }
     else {
       console.log("marker" + i + " highlighted");
-
       this.selected = i;
     }
   } 
