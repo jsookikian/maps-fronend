@@ -2,21 +2,21 @@
 <mat-grid-list cols="4" rowHeight="1:2">
 
     <mat-grid-tile id="poi-container" [colspan]="1">
-     <poi-list [(markers)]="markers"></poi-list>
+     <poi-list [(markers)]="currentMap.markers"></poi-list>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="3">
-<ngui-map center="{{lat}}, {{lng}}" 
-        zoom="{{zoom}}" 
+<ngui-map center="{{currentMap.lat}}, {{currentMap.lng}}" 
+        zoom="{{currentMap.zoom}}" 
         (mapClick)="mapClicked($event)"
         (mapReady$)="onMapReady($event)">
-    <div *ngFor="let marker of markers; let i = index" [attr.data-index]="i" > 
+    <div *ngFor="let marker of currentMap.markers; let i = index" [attr.data-index]="i" > 
         <marker id="{{'marker-'+i}}" 
             position="loc: {{marker.lat}} , {{marker.lng}}" 
             draggable="true" 
-            (click)="clicked($event, i)"
-            (dragstart)="markerClicked($event, 'dragstart', i)" 
-            (dragend)="markerClicked($event, 'dragend', i)" 
+            (click)="markerClicked($event, i)"
+            (dragstart)="markerDragged($event, 'dragstart', i)" 
+            (dragend)="markerDragged($event, 'dragend', i)" 
             (mouseover)="highlight($event, i)"
             (mouseout)="highlight($event, i)"
             >

@@ -1,8 +1,13 @@
-<toolbar></toolbar>
 <mat-card class="example-card" flex>
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Maps</mat-card-title>
+    <div *ngIf="mapComponent.currentMap != null">
+    
+      <mat-card-title (click)="editTitle()" *ngIf="!titleEditable"> Map Name: {{ mapComponent.currentMap.title }}</mat-card-title>
+          <mat-form-field *ngIf="titleEditable">
+              <input #mapName matInput (keyup.enter)="changeTitle(mapName.value)" placeholder="Map Name"> 
+      </mat-form-field>
+    </div>
     <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
@@ -14,7 +19,6 @@
       </div>  
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button (click)="saveChanges($event)">SAVE</button>
   </mat-card-actions>
 </mat-card>

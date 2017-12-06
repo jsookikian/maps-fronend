@@ -14,29 +14,30 @@ export class POIListComponent {
     markers:POI[] = [];
     selected: any;
     dialogRef: MatDialogRef<EditDialogComponent>;
-    @ViewChild('')
-    // constructor(private popup:Popup){}
+    
    constructor(public dialog: MatDialog, private elRef: ElementRef) {}
 
 
 
-    editLabel($event, i): void {
+    editLabel($event, i): boolean {
+      let changesMade: boolean = false;
     let dialogRef = this.dialog.open(EditDialogComponent, {
       height: '200px',
       data: { label: this.markers[i].label, lat: this.markers[i].lat, lng: this.markers[i].lat }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`result:  ${result}`);
       if (result === true) {
         this.markers.splice(i, 1);
-        console.log("Marker " + i + " removed");
+        changesMade = true;
       }
-      else if (result.length > 0 && result !== "true") {
+      else if (result && result.length > 0 && result !== "true") {
         this.markers[i].label = result;
+        changesMade = true;
       }
-
+      
     });
+    return changesMade;
   }
 
   isActive(i) {
@@ -44,12 +45,9 @@ export class POIListComponent {
   }
   highlight(i) {
     if (this.selected == i) {
-      console.log("marker" + i + " normal ");
-
       this.selected = null;
     }
     else {
-      console.log("marker" + i + " highlighted");
       this.selected = i;
     }
   } 

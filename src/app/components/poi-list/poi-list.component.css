@@ -16,8 +16,8 @@
 
 .poi-list {
     overflow: scroll; 
-    width: 250px;
-    height: 500px;
+    width: 230px;
+    height: 400px;
     border: 2px solid darkgrey;
 }
 

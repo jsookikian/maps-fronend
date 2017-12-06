@@ -20,7 +20,7 @@
         <span>Home</span>
       </button>
       
-      <button mat-menu-item routerLink="/create" routerLinkActive #rla="routerLinkActive" >
+      <button mat-menu-item routerLink="/create" >
         <mat-icon>add</mat-icon>
         <span>Create New Map</span>
       </button>
@@ -32,9 +32,13 @@
       </button>
 
         <mat-menu #myMaps="matMenu">
-          <button mat-menu-item>Map 1</button>
-          <button mat-menu-item>Map 2</button>
-          <button mat-menu-item>Map 3</button> 
+          <div *ngIf="maps?.length > 0">
+          <div *ngFor="let map of maps">
+          <button mat-menu-item [routerLink]="['/edit', map.id]">{{map.title}}</button>
+          </div>
+          </div>
+          <div *ngIf="maps?.length == 0">
+          </div>
         </mat-menu>
     </mat-menu>
   </mat-toolbar-row>
