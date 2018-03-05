@@ -1,0 +1,24 @@
+<!--<div class="mat-dialog-container">-->
+<h2 mat-dialog-title>Browse Image</h2>
+
+<mat-dialog-content>
+  <div *ngIf="!data.imgUrl && !fileUrl">
+    <h2 mat-dialog-title >Default Image</h2>  
+    <img align="center" src="../../../assets/pin.png" height="100px">
+  </div>
+  <div *ngIf="(data.imgUrl)">
+      <h2 mat-dialog-title>Current Image</h2>  
+      <img id="pinImage" align="center" [src]="data.imgUrl" height="100px">
+    </div>
+  <div *ngIf="(fileUrl)">
+        <h2 mat-dialog-title>Current Image</h2>  
+        <img id="pinImage" align="center" [src]="fileUrl" height="100px">
+      </div>    
+  <br>
+  <input type="file" (change)="fileChange($event, i)" placeHolder="Upload file" accept="image/*">
+  </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="([uploadFile, fileUrl])">Save</button>
+</mat-dialog-actions>
+<!--</div>-->

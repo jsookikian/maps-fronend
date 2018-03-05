@@ -22,17 +22,23 @@
                     {{marker.label}}
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="2">        
+                <mat-grid-tile [colspan]="1" [rowspan]="1">        
                     <button flex=5 class="edit-button" 
                         mat-icon-button (click)="editLabel($event, i)">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </mat-grid-tile>
+
                 <mat-grid-tile [colspan]="3" [rowspan]="1" class="poi-row">
                     {{marker.lat}}
                     <br> {{marker.lng}}
                 </mat-grid-tile>
-            
+                <mat-grid-tile [colspan]="1" [rowspan]="2">        
+                    <button flex=5 class="browse-button" 
+                        (click)="browseImage($event, i)">Browse
+                        <!-- <mat-icon>edit</mat-icon> -->
+                    </button>
+                </mat-grid-tile>
 
             </div>
         </mat-grid-list>

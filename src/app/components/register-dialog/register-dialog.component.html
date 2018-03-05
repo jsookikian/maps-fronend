@@ -1,0 +1,28 @@
+<!--<div class="mat-dialog-container">-->
+<h2 mat-dialog-title>Register</h2>
+
+        <mat-form-field>
+            <input matInput style="align:middle; width: 200px" [(ngModel)]="email" placeholder="Email"> 
+        </mat-form-field>
+        <div *ngIf="password != passwordRepeat && (password && password.length > 0); then invalidPassword; else validPassword"></div>  
+        <ng-template #invalidPassword class="mat-typography"><br><div style="color: red;">Passwords do not match.</div><br></ng-template>
+        <ng-template #validPassword><br></ng-template>
+        <!-- <div *ngIf="password === passwordRepeat">
+            <br>
+        </div> -->
+        <mat-form-field>
+            <input matInput  type="password" [(ngModel)]="password" placeholder="Password"> 
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput type="password"  [(ngModel)]="passwordRepeat" placeholder="Repeat Password"> 
+        </mat-form-field>
+<mat-dialog-content></mat-dialog-content>
+<mat-dialog-actions>
+  <div *ngIf="password === passwordRepeat && email">
+    <button mat-button [mat-dialog-close]="([email, password, passwordRepeat])">Register</button>
+  </div>
+    <button mat-button [mat-dialog-close]="true">Cancel</button>
+
+</mat-dialog-actions>
+<!--</div>-->

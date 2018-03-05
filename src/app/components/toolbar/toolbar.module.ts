@@ -5,15 +5,20 @@ import { AppMaterialModule } from './../app-material/app-material.module';
 import { ToolbarComponent} from './toolbar/toolbar.component';
 import { ToolbarRoutingModule} from './toolbar-routing.module';
 import { MapService } from  '../../services/map.service';
-
+import { RegisterDialogModule } from '../register-dialog/register-dialog.module';
+import { LoginDialogModule } from '../login-dialog/login-dialog.module';
+import { AuthService } from '../../services/auth.service';
+import { Angular2TokenService } from 'angular2-token/angular2-token';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AppMaterialModule,
-    ToolbarRoutingModule
+    ToolbarRoutingModule,
+    RegisterDialogModule,
+    LoginDialogModule
   ],
-  providers: [ MapService ],
+  providers: [ MapService, Angular2TokenService],
   declarations: [ ToolbarComponent],
   bootstrap: [ToolbarComponent ],
   exports: [ToolbarComponent]

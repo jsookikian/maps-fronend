@@ -1,7 +1,12 @@
 <mat-card class="example-card" flex>
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title (click)="editTitle()" *ngIf="!titleEditable"> Map Name: {{ mapComponent.currentMap.title }}</mat-card-title>
+        <mat-card-title style="font-weight: bold; font-size: 24px" (click)="editTitle()" *ngIf="!titleEditable">
+         Map Name: {{ mapComponent.currentMap.title }}  
+          <button class="edit-button" mat-icon-button (click)="editTitle()">
+          <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card-title>
             <mat-form-field *ngIf="titleEditable">
                 <input #mapName matInput (keyup.enter)="changeTitle(mapName.value)" placeholder="Map Name"> 
         </mat-form-field>    

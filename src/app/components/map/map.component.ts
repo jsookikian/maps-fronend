@@ -7,6 +7,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { POIListComponent } from '../poi-list/poi-list.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { SaveDialogComponent } from '../save-dialog/save-dialog.component';
+
 @Component({
   selector: 'map',
   templateUrl: 'map.component.html',
@@ -15,7 +16,7 @@ import { SaveDialogComponent } from '../save-dialog/save-dialog.component';
 export class MapComponent {
   @ViewChild(NguiMapComponent) nguiMapComponent: NguiMapComponent
   @ViewChild(POIListComponent) poiList: POIListComponent;
-  title: string = 'New Map (Click to change me)';
+  title: string = 'New Map';
   lat: number = 35.30087318661081;
   lng: number =  -120.66120503906859;
   dialogRef: MatDialogRef<SaveDialogComponent>;
@@ -35,7 +36,7 @@ export class MapComponent {
         for (let i = 0; i < maps.length; i++) {
           let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, []);
           for (let k = 0; k < maps[i].markers.length; k++) {
-            newMap.markers.push(new POI(maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label));
+            newMap.markers.push(new POI(maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
           }
           this.maps.push(newMap);
         } 
@@ -77,6 +78,9 @@ export class MapComponent {
       lati,
       lngi,
       "Label " + this.markerNumber++,
+      null
+
+
     );
     this.markers.push(newMarker);
     this.changesMade = true;
@@ -130,7 +134,7 @@ export class MapComponent {
   }
 
   saveChanges() {
-    let changesMade: boolean = true;
+    let changesMade: boolean = false;
     let dialogRef = this.dialog.open(SaveDialogComponent, {
       height: '200px',
       data: { text: "Would you like to save your changes before exiting?" }
@@ -154,10 +158,6 @@ export class MapComponent {
             });
           }
       }
-
-      
-
-
     });
       return changesMade;
   }
@@ -183,10 +183,11 @@ export class POI{
   public lat: number;
   public lng: number;
   public label: string;
-  constructor(lat, lng, label) {
+  public img: Blob;
+  constructor(lat, lng, label, img) {
     this.lat = lat;
     this.lng = lng;
     this.label = label;
-
+    this.img = img;
   }
 }

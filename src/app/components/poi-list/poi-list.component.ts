@@ -1,7 +1,9 @@
 import { Component, Input, Inject, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { NguiMapModule} from '@ngui/map';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {EditDialogComponent} from '../edit-dialog/edit-dialog.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { EditDialogComponent} from '../edit-dialog/edit-dialog.component';
+import { BrowseImageDialogComponent } from '../browse-image-dialog/browse-image-dialog.component';
+import { POI } from '../map/map.component';
 // import {EditDialog, EditDialogDialog} from '../map/confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'poi-list',
@@ -13,20 +15,21 @@ export class POIListComponent {
     @Input()
     markers:POI[] = [];
     selected: any;
-    dialogRef: MatDialogRef<EditDialogComponent>;
-    
-   constructor(public dialog: MatDialog, private elRef: ElementRef) {}
+    editDialogRef: MatDialogRef<EditDialogComponent>;
+    browseImageDialogRef: MatDialogRef<BrowseImageDialogComponent>;
+
+   constructor(public editDialog: MatDialog, public browseImageDialog: MatDialog,private elRef: ElementRef) {}
 
 
 
     editLabel($event, i): boolean {
       let changesMade: boolean = false;
-    let dialogRef = this.dialog.open(EditDialogComponent, {
+    let editDialogRef = this.editDialog.open(EditDialogComponent, {
       height: '200px',
       data: { label: this.markers[i].label, lat: this.markers[i].lat, lng: this.markers[i].lat }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    editDialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.markers.splice(i, 1);
         changesMade = true;
@@ -37,8 +40,30 @@ export class POIListComponent {
       }
       
     });
+      return changesMade;
+    }
+
+    browseImage($event, i): boolean {
+      let changesMade: boolean = false;
+    let browseImageDialogRef = this.browseImageDialog.open(BrowseImageDialogComponent, {
+      
+      data: {imgUrl: this.markers[i].img, ndx: i}
+    });
+
+    browseImageDialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.markers[i].img = result[0];
+        changesMade = true;
+      }
+      else  {
+        changesMade = false;
+      }
+     
+    });
     return changesMade;
   }
+
 
   isActive(i) {
     return this.selected === i;
@@ -53,15 +78,15 @@ export class POIListComponent {
   } 
 }
 
-class POI{
-  public lat: number;
-  public lng: number;
-  public label: string;
-  public display:boolean;
-  constructor(lat, lng, label) {
-    this.lat = lat;
-    this.lng = lng;
-    this.label = label;
-    this.display = true;
-  }
-}
+// class POI{
+//   public lat: number;
+//   public lng: number;
+//   public label: string;
+//   public display:boolean;
+//   constructor(lat, lng, label) {
+//     this.lat = lat;
+//     this.lng = lng;
+//     this.label = label;
+//     this.display = true;
+//   }
+// }

@@ -2,3 +2,18 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 // @import '~material-design-icons/iconfont/material-icons.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+
+// Create a config with the default typography levels.
+$general-typography: mat-typography-config(
+  $font-family: '"Open Sans", "Helvetica Neue", sans-serif',
+  $body-2:        mat-typography-level(14px, 24px, 600)  
+);
+
+$secondary-typography: mat-typography-config(
+  $font-family: 'Roboto, sans-serif'
+);
+
+
+// Be sure that you only ever include this mixin once!
+@include mat-core($general-typography);

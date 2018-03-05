@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class SettingsComponent implements OnInit {
-
+  loggedIn: boolean = false;
   constructor() { }
 
   ngOnInit() {

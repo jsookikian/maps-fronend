@@ -18,7 +18,6 @@ export class EditComponent implements OnInit, OnChanges {
   ) {
       this.router = router;
       this.router.events.subscribe((event: Event) => {
-      console.log(event);
       if (event instanceof NavigationEnd) {
         let saved:boolean;
         let done = false;

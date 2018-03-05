@@ -5,7 +5,9 @@
 .edit-button {
     float: right;
 }
-
+.browse-button {
+    float: right;
+}
 .highlight {
     background-color: lightgoldenrodyellow;
 }

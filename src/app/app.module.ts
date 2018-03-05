@@ -12,6 +12,10 @@ import {HttpClientModule} from  '@angular/common/http';
 import {HttpModule} from '@angular/http';
 
 import {EditDialogModule} from './components/edit-dialog/edit-dialog.module';
+import {BrowseImageDialogModule} from './components/browse-image-dialog/browse-image-dialog.module';
+import {RegisterDialogModule} from './components/register-dialog/register-dialog.module';
+import {LoginDialogModule} from './components/login-dialog/login-dialog.module';
+
 import {HomeComponent} from  './components/home/home/home.component';
 import {HomeModule} from './components/home/home.module';
 import {CreateComponent} from './components/create/create/create.component';
@@ -22,6 +26,10 @@ import {EditModule} from './components/edit/edit.module';
 import { POIListComponent} from './components/poi-list/poi-list.component';
 import { MapComponent} from './components/map/map.component';
 import { SettingsComponent } from './components/settings/settings.component';
+
+import { Angular2TokenService } from 'angular2-token';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from '../guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +42,9 @@ import { SettingsComponent } from './components/settings/settings.component';
     HttpClientModule,
     HttpModule,
     EditDialogModule,
+    BrowseImageDialogModule,
+    LoginDialogModule,
+    RegisterDialogModule,
     AppMaterialModule,
     HomeModule,
     CreateModule,
@@ -42,7 +53,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDh6ycUao464kIs4oBtr5jhRn8ui_Gy1LU'})
   ],
 
-  providers: [],
+  providers: [ Angular2TokenService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
