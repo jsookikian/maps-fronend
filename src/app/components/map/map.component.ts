@@ -187,7 +187,7 @@ export class POI{
   public lat: number;
   public lng: number;
   public label: string;
-  public img: Blob;
+  public img: any;
   constructor(lat, lng, label, img) {
     this.lat = lat;
     this.lng = lng;

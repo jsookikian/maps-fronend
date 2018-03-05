@@ -65,11 +65,27 @@ export class MapService {
             headers = headers.append("expiry", saved['expiry']);
             headers = headers.append("token-type", saved['token-type']);
             headers = headers.append("uid", saved['uid']);
+                
+            // headers = headers.append("Content-Type", undefined);
+
             let user = JSON.parse(localStorage.getItem('current-user-data'));
             console.log("User Obj", user);
-            console.log("Saving map:", map);
-            return this.http.post('http://localhost:3000/users/' + user['id'] + '/maps', map, {headers : headers})
-            .map(res => res);
+            console.log("Saving map:",map);
+            const formData = new FormData();
+
+            Object.keys(map).forEach(key => {
+                formData.append(key, map[key]);
+              });
+
+              let options: Object = {
+                headers: headers,
+            };
+
+            return this.http.post(
+                
+                'http://localhost:3000/users/' + user['id'] + '/maps',map,
+                options)
+        }).map(res => res);
         // return this.http.post('https://infinite-temple-70788.herokuapp.com/users/1/maps?token=zxsF81gRMCF6SgEJ9C3C', map)
         //     .map(res => res.json());   
         }

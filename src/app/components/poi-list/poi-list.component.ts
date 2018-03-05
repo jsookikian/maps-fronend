@@ -53,7 +53,10 @@ export class POIListComponent {
     browseImageDialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result) {
-        this.markers[i].img = result[0];
+        let formdata: FormData = new FormData();
+        let fileReader = new FileReader();
+        formdata.append(result[0].name, result[0]);
+        this.markers[i].img = result[1];
         changesMade = true;
       }
       else  {
