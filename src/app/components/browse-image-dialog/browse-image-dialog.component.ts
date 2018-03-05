@@ -32,7 +32,7 @@ export class BrowseImageDialogComponent {
         this.fileUrl = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
-      // this.uploadFile = reader.readAsBinaryString(event.target.files[0])
+      // this.uploadFile = reader.readAsArrayBuffer(event.target.files[0])
       this.uploadFile = file;
     }
 

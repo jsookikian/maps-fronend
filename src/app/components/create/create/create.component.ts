@@ -29,6 +29,7 @@ export class CreateComponent implements OnInit {
   }
 
   saveChanges() {
+    console.log("saving changes");
     if (!this.mapComponent.saveChanges()) {
       
     }

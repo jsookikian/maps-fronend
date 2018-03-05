@@ -147,7 +147,8 @@ export class MapComponent {
           // POST
           if (this.newMap) {
             console.log("Saving new map...");
-            this.mapService.saveNewMap(this.currentMap).subscribe(map =>{ 
+            this.mapService.saveNewMap(this.currentMap).subscribe(res =>{ 
+              console.log(res);
               changesMade = true;
             });
           }
@@ -157,6 +158,9 @@ export class MapComponent {
               changesMade = true;
             });
           }
+      }
+      else {
+        console.log("cancel save map");
       }
     });
       return changesMade;

@@ -57,7 +57,7 @@ export class MapService {
 
     saveNewMap(map) {
 
-        if (localStorage.getItem('current-user-headers') && localStorage.getItem('current-user-data')) {
+        if (this.authService.userSignedIn()) {
             let saved = JSON.parse(localStorage.getItem('current-user-headers'));
             let headers = new HttpHeaders();
             headers = headers.append("access-token", saved['access-token']);
@@ -67,6 +67,7 @@ export class MapService {
             headers = headers.append("uid", saved['uid']);
             let user = JSON.parse(localStorage.getItem('current-user-data'));
             console.log("User Obj", user);
+            console.log("Saving map:", map);
             return this.http.post('http://localhost:3000/users/' + user['id'] + '/maps', map, {headers : headers})
             .map(res => res);
         // return this.http.post('https://infinite-temple-70788.herokuapp.com/users/1/maps?token=zxsF81gRMCF6SgEJ9C3C', map)
