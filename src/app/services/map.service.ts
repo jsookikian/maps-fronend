@@ -85,7 +85,7 @@ export class MapService {
                 
                 'http://localhost:3000/users/' + user['id'] + '/maps',map,
                 options)
-        }).map(res => res);
+        .map(res => res);
         // return this.http.post('https://infinite-temple-70788.herokuapp.com/users/1/maps?token=zxsF81gRMCF6SgEJ9C3C', map)
         //     .map(res => res.json());   
         }

@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
   loggedIn: boolean = false;
-  constructor() { }
+  user :any;
+  constructor() {
+  this.user = JSON.parse(localStorage.getItem('current-user-data'));
+   }
 
   ngOnInit() {
   }

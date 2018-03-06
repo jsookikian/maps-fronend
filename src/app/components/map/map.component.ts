@@ -64,7 +64,6 @@ export class MapComponent {
     this.newMap = true;
   }
 
-
   mapClicked($event) {
     console.log($event);
     console.log($event.latLng.lng());

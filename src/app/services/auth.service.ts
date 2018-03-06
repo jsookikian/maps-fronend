@@ -13,7 +13,7 @@ export class AuthService {
   currentUser: any;
 
   constructor(public http:HttpClient) {
-    if (localStorage.getItem('current-user-headers') != null) {
+    if (localStorage.getItem('current-user-headers') != null && localStorage.getItem('current-user-data') != null)  {
       // this.currentUser = localStorage.getItem('current-user');
       // this.validateToken().subscribe(
       //   res => {
@@ -56,25 +56,52 @@ export class AuthService {
     return this.userLoggedIn;
   }
 
-  registerUser(signUpData:  {email:string, password:string, passwordConfirmation:string}){
-    let headers = new HttpHeaders();
-    headers = headers.append('content-type', "application/json");
-    return this.http.post('http://localhost:3000/auth/sign_up',signUpData)
-      .map(res => res);
+  registerUser(signUpData){
+    return this.http.post('http://localhost:3000/auth/',signUpData, {observe: "response"})
+      .map(
+        res => {
+          // console.log(res.);
+          let keys = res.headers.keys();
+          let set = res.headers.set;
+
+          console.log("keys",keys);
+          console.log("set", set);
+          let headers = res.headers['headers'];
+          let headerObj = {};
+          for (var key in keys) {
+             console.log("key" + keys[key] + "value: " + res.headers.getAll(keys[key]));
+             headerObj[keys[key]] =  res.headers.getAll(keys[key]);
+          }
+          console.log("headers obj",headerObj);
+          let tokenHeaders = {};
+          tokenHeaders["access-token"] = headerObj["access-token"];
+          tokenHeaders["client"] = headerObj["client"];
+          tokenHeaders["expiry"] = headerObj["expiry"];
+          tokenHeaders["token-type"] = headerObj["token-type"];
+          tokenHeaders["uid"] = headerObj["uid"];
+          console.log("token headers obj",headerObj);
+          this.userLoggedIn = true;
+          localStorage.setItem('current-user-data', JSON.stringify(res.body['data']))
+          localStorage.setItem('current-user-headers', JSON.stringify(tokenHeaders));
+          console.log(JSON.parse(localStorage.getItem('current-user-headers')));
+          console.log(JSON.parse(localStorage.getItem('current-user-data')));
+
+          return res;       
+        });
   }
 
   logoutUser() {
     let saved = JSON.parse(localStorage.getItem('current-user-headers'));
+    let user = JSON.parse(localStorage.getItem('current-user-data'));
+
     let headers = new HttpHeaders();
     headers = headers.append("access-token", saved['access-token']);
-
     headers = headers.append("client", saved['client']);
-
     headers = headers.append("expiry", saved['expiry']);
     headers = headers.append("token-type", saved['token-type']);
     headers = headers.append("uid", saved['uid']);
+    console.log("lgoutouser")
     return this.http.delete('http://localhost:3000/auth/sign_out', {headers : headers}).map(
-      
       res => {
         console.log("delete result", res)
         this.userLoggedIn = false;
@@ -86,7 +113,7 @@ export class AuthService {
   }
   logInUser(signInData: {email:string, password:string}){
         let headers = new HttpHeaders();
-        headers = headers.append('content-type', "application/json");
+        headers = headers.append('Content-Type', "application/json");
         // headers = headers.append('observe', "response");
 
         // headers = headers.append('responseType', "text");
@@ -122,7 +149,7 @@ export class AuthService {
               console.log(JSON.parse(localStorage.getItem('current-user-headers')));
               console.log(JSON.parse(localStorage.getItem('current-user-data')));
 
-              res.status ;       
+              return res;       
             });
       // return this.http.post('https://infinite-temple-70788.herokuapp.com/users/1/maps?token=zxsF81gRMCF6SgEJ9C3C', map)
       //     .map(res => res.json());   

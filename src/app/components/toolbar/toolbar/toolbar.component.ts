@@ -54,6 +54,7 @@ export class ToolbarComponent implements OnChanges {
 
 
   parseMaps() {
+    if (this.authService.userSignedIn()) {
     let maps;
     this.mapService.getMaps().subscribe(fetchedMaps => {
       if (fetchedMaps) {
@@ -68,6 +69,7 @@ export class ToolbarComponent implements OnChanges {
     }
     });
   }
+  }
   userLoggedIn() {
     // console.log("User Signed in value", this.authService.userLoggedIn);
     return this.authService.userSignedIn();
@@ -76,7 +78,12 @@ export class ToolbarComponent implements OnChanges {
   logout() {
     console.log("Logging out..");
     this.authService.logoutUser().subscribe(
-      res => console.log("Logged out", res)
+      res => {
+        console.log("Logged out", res)
+        this.router.navigate(['/'])
+        
+      }
+
     );
     // .subscribe(res => console.log("delete!", res));
   }
@@ -120,7 +127,10 @@ export class ToolbarComponent implements OnChanges {
       this.authService.logInUser(user).subscribe(
 
         (res) => {
-            console.log('success', res);
+            if (res.status == 200) {
+              this.parseMaps();
+
+            }
                     
          },
 
@@ -142,8 +152,8 @@ export class ToolbarComponent implements OnChanges {
   register($event): boolean {
     let changesMade: boolean = false;
   let registerDialogRef = this.registerDialog.open(RegisterDialogComponent, {
-    width: '250px',
-    height: '350px',
+    width: '300px',
+    height: '475px',
     data: {x:5}
   });
 
@@ -154,10 +164,21 @@ export class ToolbarComponent implements OnChanges {
       let user = {
         email: result[0],
         password: result[1],
-        passwordConfirmation: result[2]
+        // passwordConfirmation: result[2]
       };
       //here is where we auth
+      this.authService.registerUser(user).subscribe(
 
+        (res) => {
+            if (res.status == 200) {
+              this.parseMaps();
+
+            }
+                    
+         },
+
+
+    )
       changesMade  = true;
       }
     else  {
