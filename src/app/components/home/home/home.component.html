@@ -8,7 +8,12 @@
     <div *ngIf="!loggedIn">
         <div flex layout="row">
           <mat-card-content style="border-color: darkgray" flex>
+              <div *ngIf="userSignedIn()">  
+            <h2> Welcome. Use the menu bar to edit a map or create a new map.</h2>
+                </div>  
+                <div *ngIf="!userSignedIn()">
               <h2 style="width: 50%;">Welcome to AR Maps Editor. Please Login.</h2>
+            </div>
               <mat-grid-list cols="1" rowHeight="1:2">
                 
                 </mat-grid-list>
@@ -18,7 +23,9 @@
       <div *ngIf="loggedIn">
         <div flex layout="row">
           <mat-card-content style="border-color: darkgray" flex>
-              <h2> Welcome. Please select a map to edit </h2>
+            <div *ngIf="userSignedIn()">
+                <h2> Welcome. Please select a map to edit </h2>
+            </div>
           </mat-card-content>
         </div>
       </div>

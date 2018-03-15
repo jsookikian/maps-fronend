@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapComponent} from '../../map/map.component';
 import { POIListComponent} from '../../poi-list/poi-list.component';
 import { NavigationEnd, Event, Router, ActivatedRoute } from '@angular/router';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-create',
@@ -10,6 +11,7 @@ import { NavigationEnd, Event, Router, ActivatedRoute } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
   @ViewChild(MapComponent) mapComponent: MapComponent;
+  @ViewChild(MatSlideToggle) publicToggle: MatSlideToggle;
   titleEditable:boolean;
   router: Router;
   currentUrl: string;
@@ -25,10 +27,14 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
       this.mapComponent.createNewMap();
+      this.publicToggle.checked = this.mapComponent.currentMap.is_public;
+
   }
 
   saveChanges() {
     console.log("saving changes");
+
+    this.mapComponent.currentMap.is_public = this.publicToggle.checked;
     if (!this.mapComponent.saveChanges()) {
       
     }

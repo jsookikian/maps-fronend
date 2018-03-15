@@ -15,6 +15,7 @@
                     mat-icon-button (click)="editLabel($event, i)">edit</button>
 
         </mat-list-item>-->
+        <div *ngIf="marker._destroy == '0'">
 
         <mat-grid-list cols="4" rowHeight="35px" [ngClass]="{'active': isActive(i)}">
             <div (mouseover)="highlight(i)" >
@@ -30,6 +31,7 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="3" [rowspan]="1" class="poi-row">
+                    
                     {{marker.lat}}
                     <br> {{marker.lng}}
                 </mat-grid-tile>
@@ -41,9 +43,13 @@
                 </mat-grid-tile>
 
             </div>
+
         </mat-grid-list>
         <div style="height: 3px;"></div>
         <mat-divider></mat-divider>
+
+    </div>
+
     </div>
 
 </mat-list>

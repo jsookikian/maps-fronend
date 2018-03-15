@@ -42,7 +42,7 @@ export class AuthService {
 
     console.log("headers obj validate", headers);
     return this.http
-    .get('http://localhost:3000/auth/validate_token' ,{ headers: headers, observe : "response"})
+    .get('https://infinite-temple-70788.herokuapp.com/auth/validate_token' ,{ headers: headers, observe : "response"})
     .map(res => res);
     }
   }
@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   registerUser(signUpData){
-    return this.http.post('http://localhost:3000/auth/',signUpData, {observe: "response"})
+    return this.http.post('https://infinite-temple-70788.herokuapp.com/auth/',signUpData, {observe: "response"})
       .map(
         res => {
           // console.log(res.);
@@ -101,7 +101,7 @@ export class AuthService {
     headers = headers.append("token-type", saved['token-type']);
     headers = headers.append("uid", saved['uid']);
     console.log("lgoutouser")
-    return this.http.delete('http://localhost:3000/auth/sign_out', {headers : headers}).map(
+    return this.http.delete('https://infinite-temple-70788.herokuapp.com/auth/sign_out', {headers : headers}).map(
       res => {
         console.log("delete result", res)
         this.userLoggedIn = false;
@@ -119,7 +119,7 @@ export class AuthService {
         // headers = headers.append('responseType', "text");
         // headers = headers.append('Access-Control-Allow-Credentials', "true");
 
-        return this.http.post<user>('http://localhost:3000/auth/sign_in', signInData, {headers : headers, observe: "response"})
+        return this.http.post<user>('https://infinite-temple-70788.herokuapp.com//auth/sign_in', signInData, {headers : headers, observe: "response"})
           .map(
   
             res => {

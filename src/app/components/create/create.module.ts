@@ -10,6 +10,7 @@ import { MapComponent} from '../map/map.component';
 import { POIListModule} from '../poi-list/poi-list.module';
 import { EditDialogModule} from '../edit-dialog/edit-dialog.module';
 import {ToolbarModule} from '../toolbar/toolbar.module';
+import { MatSlideToggleModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -20,7 +21,9 @@ import {ToolbarModule} from '../toolbar/toolbar.module';
     EditDialogModule,
     MapModule,
     POIListModule,
-    ToolbarModule
+    ToolbarModule,
+    MatSlideToggleModule
+
   ],
   declarations: [CreateComponent]
 })

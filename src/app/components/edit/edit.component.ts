@@ -3,6 +3,7 @@ import { MapComponent} from '../map/map.component';
 import { POIListComponent} from '../poi-list/poi-list.component';
 import { CanDeactivate, NavigationEnd, NavigationStart, Event, Router, ActivatedRoute, Params, NavigationCancel } from '@angular/router';
 import { UnsavedChangesGuard } from '../unsaved-changes-guard/unsaved-changes-guard.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -10,6 +11,8 @@ import { UnsavedChangesGuard } from '../unsaved-changes-guard/unsaved-changes-gu
 })
 export class EditComponent implements OnInit, OnChanges {
   @ViewChild(MapComponent) mapComponent: MapComponent;
+  @ViewChild(MatSlideToggle) publicToggle: MatSlideToggle;
+
   titleEditable:boolean;
   firstTime:boolean = true;
   currentId: string;
@@ -36,13 +39,15 @@ export class EditComponent implements OnInit, OnChanges {
             console.log("current id: " + this.currentId);
             setTimeout(() => {
               this.mapComponent.setCurrentMap(this.currentId);
+              this.publicToggle.checked = this.mapComponent.currentMap.is_public;
             }, 100);
-          });
+          })  ;
         // }
       }
       if (event instanceof NavigationStart) {
         
           this.currentUrl = event.url;
+          this.publicToggle.checked = this.mapComponent.currentMap.is_public;
 
       }
 
@@ -56,10 +61,16 @@ export class EditComponent implements OnInit, OnChanges {
 
   }
 
+
+  togglePublic($event) {
+    console.log("toggle", $event);
+  }
+
   ngOnInit() {
     console.log("Edit Map Initialized");
     setTimeout(() => {
         this.mapComponent.setCurrentMap(this.currentId);
+        this.publicToggle.checked = this.mapComponent.currentMap.is_public;
     }, 100);
   }
 
@@ -68,6 +79,8 @@ export class EditComponent implements OnInit, OnChanges {
     console.log("Changed");
     setTimeout(() => {
         this.mapComponent.setCurrentMap(this.currentId);
+        this.publicToggle.checked = this.mapComponent.currentMap.is_public;
+
     }, 100);
   }
 
@@ -75,6 +88,7 @@ export class EditComponent implements OnInit, OnChanges {
     // if (!this.mapComponent.saveChanges()) {
 
     // }
+    this.mapComponent.currentMap.is_public = this.publicToggle.checked;
     return this.mapComponent.saveChanges();
   }
 

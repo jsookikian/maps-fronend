@@ -55,24 +55,41 @@ export class ToolbarComponent implements OnChanges {
 
   parseMaps() {
     if (this.authService.userSignedIn()) {
+    this.maps = [];
     let maps;
     this.mapService.getMaps().subscribe(fetchedMaps => {
       if (fetchedMaps) {
         maps = fetchedMaps;
         for (let i = 0; i < maps.length; i++) {
-          let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, []);
+          console.log("Map Title: " + maps[i].title + "\tmap id: " + maps[i].uid);
+          let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, [], maps[i].is_public);
           for (let k = 0; k < maps[i].markers.length; k++) {
-            newMap.markers.push(new POI(maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
+            newMap.markers.push(new POI(maps[i].markers[k].id, maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
           }
           this.maps.push(newMap);
         } 
     }
     });
   }
+  else {
+    this.maps = []
+  }
   }
   userLoggedIn() {
     // console.log("User Signed in value", this.authService.userLoggedIn);
     return this.authService.userSignedIn();
+  }
+
+  changesMade() {
+    if (this.mapService.changesMade) {
+      this.parseMaps();
+      this.mapService.changesMade = false;
+      
+      return true;
+    }
+    else {
+      return false
+    }
   }
   
   logout() {
@@ -81,6 +98,7 @@ export class ToolbarComponent implements OnChanges {
       res => {
         console.log("Logged out", res)
         this.router.navigate(['/'])
+        this.parseMaps();
         
       }
 
@@ -93,9 +111,10 @@ export class ToolbarComponent implements OnChanges {
     this.mapService.getMaps().subscribe(fetchedMaps => {
         maps = fetchedMaps;
         for (let i = 0; i < maps.length; i++) {
-          let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, []);
+          let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, [], maps[i].is_public);
+          console.log("Map Title: " + maps[i].title + "\tmap id: " + maps[i].id)
           for (let k = 0; k < maps[i].markers.length; k++) {
-            newMap.markers.push(new POI(maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
+            newMap.markers.push(new POI(maps[i].markers[k].id, maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
           }
           this.maps.push(newMap);
         } 

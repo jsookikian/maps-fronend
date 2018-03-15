@@ -17,7 +17,7 @@ export class POIListComponent {
     selected: any;
     editDialogRef: MatDialogRef<EditDialogComponent>;
     browseImageDialogRef: MatDialogRef<BrowseImageDialogComponent>;
-
+    newMap: boolean;
    constructor(public editDialog: MatDialog, public browseImageDialog: MatDialog,private elRef: ElementRef) {}
 
 
@@ -31,7 +31,12 @@ export class POIListComponent {
 
     editDialogRef.afterClosed().subscribe(result => {
       if (result === true) {
+        if (this.newMap) {
         this.markers.splice(i, 1);
+        }
+        else {
+          this.markers[i]._destroy = "1";
+        }
         changesMade = true;
       }
       else if (result && result.length > 0 && result !== "true") {

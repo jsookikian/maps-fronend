@@ -34,14 +34,14 @@ export class MapComponent {
     this.mapService.getMaps().subscribe(fetchedMaps => {
         maps = fetchedMaps;
         for (let i = 0; i < maps.length; i++) {
-          let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, []);
+          let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, [], maps[i].is_public);
           for (let k = 0; k < maps[i].markers.length; k++) {
-            newMap.markers.push(new POI(maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
+            newMap.markers.push(new POI(maps[i].markers[k].id, maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
           }
           this.maps.push(newMap);
         } 
       });
-      this.currentMap = new Map(0, "", this.lat, this.lng, this.zoom, this.markers);
+      this.currentMap = new Map(0, "", this.lat, this.lng, this.zoom, this.markers, false);
   }
 
 
@@ -52,16 +52,18 @@ export class MapComponent {
         this.markers = this.maps[i].markers;
       }
     }
+    this.poiList.newMap = false;
     this.newMap = false;
   }
 
   createNewMap() {
     console.log(this.maps);
-    let newMap = new Map(Math.round(Math.random() * 10 + 2), this.title, this.lat, this.lng, this.zoom, []);
+    let newMap = new Map(Math.round(Math.random() * 10 + 2), this.title, this.lat, this.lng, this.zoom, [], false);
     this.maps.push(newMap);
     this.currentMap = newMap;
     this.markers = this.currentMap.markers;
     this.newMap = true;
+    this.poiList.newMap = true;
   }
 
   mapClicked($event) {
@@ -74,6 +76,7 @@ export class MapComponent {
       lng: lngi
     }
     let newMarker = new POI(
+      null,
       lati,
       lngi,
       "Label " + this.markerNumber++,
@@ -173,24 +176,30 @@ export class Map {
   lng: number;
   zoom: number;
   markers:POI[];
-  constructor(id, title, lat, lng, zoom, markers) {
+  is_public: boolean;
+  constructor(id, title, lat, lng, zoom, markers, is_public) {
     this.id = id;
     this.title = title;
     this.lat = lat;
     this.lng = lng;
     this.zoom = zoom;
     this.markers = markers;
+    this.is_public = is_public;
   }
 }
 export class POI{
+  public id: number;
   public lat: number;
   public lng: number;
   public label: string;
   public img: any;
-  constructor(lat, lng, label, img) {
+  public _destroy: string;
+  constructor(id, lat, lng, label, img) {
+    this.id = id;
     this.lat = lat;
     this.lng = lng;
     this.label = label;
     this.img = img;
+    this._destroy = "0";
   }
 }

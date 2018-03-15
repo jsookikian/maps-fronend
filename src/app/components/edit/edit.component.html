@@ -3,10 +3,11 @@
     <div mat-card-avatar class="example-header-image"></div>
     <div *ngIf="mapComponent.currentMap != null">
     
-      <mat-card-title (click)="editTitle()" *ngIf="!titleEditable"> Map Name: {{ mapComponent.currentMap.title }}</mat-card-title>
+      <mat-card-title style="font-weight: bold; font-size: 24px" (click)="editTitle()" *ngIf="!titleEditable"> Map Name: {{ mapComponent.currentMap.title }}</mat-card-title>
           <mat-form-field *ngIf="titleEditable">
               <input #mapName matInput (keyup.enter)="changeTitle(mapName.value)" placeholder="Map Name"> 
       </mat-form-field>
+      <mat-slide-toggle (change)="togglePublic($event)" [checked]="this.mapComponent.currentMap.isPublic">Public</mat-slide-toggle>
     </div>
     <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>

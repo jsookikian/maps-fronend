@@ -11,8 +11,9 @@
         (mapClick)="mapClicked($event)"
         (mapReady$)="onMapReady($event)">
     <div *ngFor="let marker of currentMap.markers; let i = index" [attr.data-index]="i" > 
+        <div *ngIf="marker._destroy == '0'">
         <marker id="{{'marker-'+i}}" 
-            position="location:{{marker.lat}} , {{marker.lng}}" 
+            position="location: {{marker.lat}} , {{marker.lng}}" 
             draggable="true" 
             (click)="markerClicked($event, i)"
             (dragstart)="markerDragged($event, 'dragstart', i)" 
@@ -22,6 +23,7 @@
             >
         <!--(positionChanged)="markerClicked($event, 'changed', i)" (cursorChanged)="markerClicked($event, 'changed', i)"-->
         </marker>
+    </div>
           <!--<info-window id="{{'iw-'+i}}">
             <div *ngIf="marker.display">
                 lat: {{ marker.lat }}, lng: {{ marker.lng }}

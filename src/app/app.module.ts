@@ -26,6 +26,7 @@ import {EditModule} from './components/edit/edit.module';
 import { POIListComponent} from './components/poi-list/poi-list.component';
 import { MapComponent} from './components/map/map.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { Angular2TokenService } from 'angular2-token';
 import { AuthService } from './services/auth.service';

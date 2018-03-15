@@ -40,14 +40,15 @@
         <span> My Maps </span>
       </button>
       </div>
-
+      
         <mat-menu #myMaps="matMenu">
-          <div *ngIf="maps?.length > 0">
-          <div *ngFor="let map of maps">
-          <button mat-menu-item [routerLink]="['/edit', map.id]">{{map.title}}</button>
-          </div>
+          <div *ngIf="maps?.length > 0 && !changesMade()">
+            <div *ngFor="let map of maps">
+              <button mat-menu-item [routerLink]="['/edit', map.id]">{{map.title}}</button>
+            </div>
           </div>
           <div *ngIf="maps?.length == 0">
+              <button mat-menu-item>No Maps Available</button>
           </div>
         </mat-menu>
     </mat-menu>
