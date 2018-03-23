@@ -101,4 +101,33 @@ export class MapService {
         }
     }
 
+    deleteMap(id) {
+        if (this.authService.userSignedIn()) {
+            let saved = JSON.parse(localStorage.getItem('current-user-headers'));
+            let headers = new HttpHeaders();
+            headers = headers.append("access-token", saved['access-token']);
+            headers = headers.append("client", saved['client']);
+            headers = headers.append("expiry", saved['expiry']);
+            headers = headers.append("token-type", saved['token-type']);
+            headers = headers.append("uid", saved['uid']);
+                
+            // headers = headers.append("Content-Type", undefined);
+
+            let user = JSON.parse(localStorage.getItem('current-user-data'));
+            console.log("User Obj", user);
+            // console.log("Saving map:",map);
+            const formData = new FormData();
+            this.changesMade = true;
+
+              let options: Object = {
+                headers: headers,
+            };
+            console.log("Deleting map", id);
+            return this.http.delete(
+                'https://infinite-temple-70788.herokuapp.com/maps/' + id ,
+                options)
+        .map(res => res);
+        }
+    }
+
 }

@@ -92,6 +92,11 @@ export class EditComponent implements OnInit, OnChanges {
     return this.mapComponent.saveChanges();
   }
 
+  deleteMap() {
+    this.mapComponent.deleteMap(this.currentId);
+
+  }
+
   editTitle() {
     this.titleEditable = true;
   }

@@ -1,0 +1,34 @@
+<mat-card class="example-card" flex>
+  <mat-card-content>
+      <mat-grid-list style="align-items: center;"cols="3" rowHeight="38px">
+          <mat-grid-tile>
+          <mat-card-title style="font-weight: bold; font-size: 20px; align-items: center;" (click)="editTitle()" *ngIf="!titleEditable">
+              Map Name: {{ mapComponent.currentMap.title }}  
+              <button class="edit-button" mat-icon-button (click)="editTitle()">
+              <mat-icon>edit</mat-icon>
+              </button>
+            </mat-card-title>
+                <mat-form-field *ngIf="titleEditable">
+                    <input #mapName matInput (keyup.enter)="changeTitle(mapName.value)" placeholder="Map Name"> 
+            </mat-form-field> 
+          </mat-grid-tile>  
+          <mat-grid-tile>
+              <mat-slide-toggle style="font-size: 20px" >Public</mat-slide-toggle>
+    
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <button mat-raised-button color="primary" (click)="saveChanges()">SAVE</button>
+    
+          </mat-grid-tile>
+        </mat-grid-list>
+  <!--<img mat-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">-->
+      <div flex layout="row">
+         <mat-card-content style="border-color: darkgray" flex>
+          <br>  
+          <map ></map>
+         </mat-card-content>
+      </div>  
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+</mat-card>

@@ -7,7 +7,6 @@ export class UnsavedChangesGuard implements CanDeactivate<EditComponent> {
   constructor(private router: Router) {}
 
   canDeactivate(component: EditComponent, deactivate) {
-    // return window.confirm('You have unsaved changes. Still want to leave?');
     return deactivate;
   }
 }

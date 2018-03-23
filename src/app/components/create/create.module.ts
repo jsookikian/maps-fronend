@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CreateRoutingModule } from './create-routing.module';
-import { CreateComponent } from './create/create.component';
+import { CreateComponent } from './create.component';
 import { AppMaterialModule } from './../app-material/app-material.module';
 import { NguiMapModule} from '@ngui/map';
 import { MapModule} from '../map/map.module';

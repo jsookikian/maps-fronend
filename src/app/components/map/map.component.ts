@@ -1,6 +1,7 @@
 import { Component, ViewChild , Input} from '@angular/core';
 import { MapService} from  '../../services/map.service';
 import { NguiMapComponent} from '@ngui/map';
+import { CanDeactivate, NavigationEnd, NavigationStart, Event, Router, ActivatedRoute, Params, NavigationCancel } from '@angular/router';
 
 import { ApplicationRef } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
@@ -29,8 +30,9 @@ export class MapComponent {
   public currentMap: Map = null;
   changesMade: boolean = false;
   newMap: boolean = true;
-  constructor(public dialog: MatDialog, public mapService: MapService) {
+  constructor(private router: Router, public dialog: MatDialog, public mapService: MapService) {
     let maps;
+    this.router = router;
     this.mapService.getMaps().subscribe(fetchedMaps => {
         maps = fetchedMaps;
         for (let i = 0; i < maps.length; i++) {
@@ -139,7 +141,9 @@ export class MapComponent {
     let changesMade: boolean = false;
     let dialogRef = this.dialog.open(SaveDialogComponent, {
       height: '200px',
-      data: { text: "Would you like to save your changes before exiting?" }
+      data: { title: "Save Changes?",
+              text: "Would you like to save your changes before exiting?",
+              action: "Save" }
 
     });
 
@@ -147,19 +151,66 @@ export class MapComponent {
       console.log(`result:  ${result}`);
       if (result === true) {
           // POST
+
           if (this.newMap) {
             console.log("Saving new map...");
+            // let title = this.currentMap.title;
+
             this.mapService.saveNewMap(this.currentMap).subscribe(res =>{ 
               console.log(res);
               changesMade = true;
             });
+            // let curIndex = -1;
+            // this.mapService.getMaps().subscribe(fetchedMaps => {
+            //   let maps;
+            //   maps = fetchedMaps;
+            //   for (let i = 0; i < maps.length; i++) {
+            //     if (maps[i].title === title) {
+            //       curIndex = i;
+            //     }
+            //     let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, [], maps[i].is_public);
+            //     for (let k = 0; k < maps[i].markers.length; k++) {
+            //       newMap.markers.push(new POI(maps[i].markers[k].id, maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
+            //     }
+            //     this.maps.push(newMap);
+            //   } 
+            // });
+            // this.currentMap = this.maps[curIndex];
           }
           else {
+            //PATCH
             console.log("Updating map...");
             this.mapService.updateMap(this.currentMap).subscribe(map =>{ 
               changesMade = true;
             });
           }
+      }
+      else {
+        console.log("cancel save map");
+      }
+    });
+      return changesMade;
+  }
+  
+  deleteMap(id) {
+    let changesMade: boolean = false;
+    let dialogRef = this.dialog.open(SaveDialogComponent, {
+      height: '200px',
+      data: { title: "Delete Map",
+              text: "Are you sure you would like to delete this map?",
+            action: "Delete" }
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`result:  ${result}`);
+      if (result === true) {
+          // DELETE
+          this.mapService.deleteMap(id).subscribe(res =>{ 
+            this.router.navigate(['/']);
+            console.log(res);
+            changesMade = true;
+          });
       }
       else {
         console.log("cancel save map");

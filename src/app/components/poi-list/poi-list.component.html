@@ -1,20 +1,8 @@
 <div   *ngIf="markers?.length > 0" style="overflow:scroll;">
-<mat-list dense flex class="poi-list">
+<h3 style="font-weight: bold;" >Points of Interest </h3>
+    <mat-list dense flex class="poi-list">
     <div *ngFor="let marker of markers let i = index" [attr.data-index]="i" >
-        <!--<mat-list-item  [ngClass]="{'active': isActive(i)}" class="mat-2-line" layout="row"> 
-                <div (mouseover)="highlight(i)" class="mat-list-item-text">
-                    <p matLine class="label">
-                        {{marker.label}}
-                    </p>
-                    <p matLine>
-                        {{marker.lat}}, {{marker.lng}}
-                    </p>
-                </div>
-                <span flex></span>           
-                <button flex=5 class="edit-button" 
-                    mat-icon-button (click)="editLabel($event, i)">edit</button>
 
-        </mat-list-item>-->
         <div *ngIf="marker._destroy == '0'">
 
         <mat-grid-list cols="4" rowHeight="35px" [ngClass]="{'active': isActive(i)}">
@@ -36,10 +24,7 @@
                     <br> {{marker.lng}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="2">        
-                    <button flex=5 class="browse-button" 
-                        (click)="browseImage($event, i)">Browse
-                        <!-- <mat-icon>edit</mat-icon> -->
-                    </button>
+
                 </mat-grid-tile>
 
             </div>

@@ -16,9 +16,9 @@ import {BrowseImageDialogModule} from './components/browse-image-dialog/browse-i
 import {RegisterDialogModule} from './components/register-dialog/register-dialog.module';
 import {LoginDialogModule} from './components/login-dialog/login-dialog.module';
 
-import {HomeComponent} from  './components/home/home/home.component';
+import {HomeComponent} from  './components/home/home.component';
 import {HomeModule} from './components/home/home.module';
-import {CreateComponent} from './components/create/create/create.component';
+import {CreateComponent} from './components/create/create.component';
 import {CreateModule} from './components/create/create.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {EditModule} from './components/edit/edit.module';

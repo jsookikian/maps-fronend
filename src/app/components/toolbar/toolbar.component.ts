@@ -2,15 +2,15 @@ import { Component, Input, Inject, OnChanges, ViewChild } from '@angular/core';
 import { NguiMapModule} from '@ngui/map';
 import { NavigationEnd, Event, Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { MapService } from  '../../../services/map.service';
-import {Map, POI} from  '../../map/map.component';
+import { MapService } from  '../../services/map.service';
+import {Map, POI} from  '../map/map.component';
 import { makeDecorator } from '@angular/core/src/util/decorators';
-import { LoginDialogComponent} from '../../login-dialog/login-dialog.component';
-import { RegisterDialogComponent} from '../../register-dialog/register-dialog.component';
+import { LoginDialogComponent} from '../login-dialog/login-dialog.component';
+import { RegisterDialogComponent} from '../register-dialog/register-dialog.component';
 import { Angular2TokenService } from 'angular2-token/angular2-token';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { ChangeDetectorRef } from '@angular/core/src/change_detection/change_detector_ref';
-// import {EditDialog, EditDialogDialog} from '../map/confirm-dialog/confirm-dialog.component';
+
 @Component({
   selector: 'toolbar',
   templateUrl: 'toolbar.component.html',
@@ -38,17 +38,7 @@ export class ToolbarComponent implements OnChanges {
         this.currentUrl = event.url;
       }
     });
-    // let maps;
-    // this.mapService.getMaps().subscribe(fetchedMaps => {
-    //   maps = fetchedMaps;
-    //   for (let i = 0; i < maps.length; i++) {
-    //     let newMap = new Map(maps[i].id, maps[i].title, maps[i].lat, maps[i].lng, maps[i].zoom, []);
-    //     for (let k = 0; k < maps[i].markers.length; k++) {
-    //       newMap.markers.push(new POI(maps[i].markers[k].lat, maps[i].markers[k].lng, maps[i].markers[k].label, maps[i].markers[k].img));
-    //     }
-    //     this.maps.push(newMap);
-    //   } 
-    // });
+
         this.parseMaps();
   }
 
@@ -76,7 +66,6 @@ export class ToolbarComponent implements OnChanges {
   }
   }
   userLoggedIn() {
-    // console.log("User Signed in value", this.authService.userLoggedIn);
     return this.authService.userSignedIn();
   }
 
@@ -181,8 +170,9 @@ export class ToolbarComponent implements OnChanges {
     if (result) {
       this.router.navigate(['/'])
       let user = {
-        email: result[0],
-        password: result[1],
+        nickname: result[0],
+        email: result[1],
+        password: result[2],
         // passwordConfirmation: result[2]
       };
       //here is where we auth

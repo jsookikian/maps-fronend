@@ -1,25 +1,40 @@
 <mat-card class="example-card" flex>
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <div *ngIf="mapComponent.currentMap != null">
-    
-      <mat-card-title style="font-weight: bold; font-size: 24px" (click)="editTitle()" *ngIf="!titleEditable"> Map Name: {{ mapComponent.currentMap.title }}</mat-card-title>
-          <mat-form-field *ngIf="titleEditable">
-              <input #mapName matInput (keyup.enter)="changeTitle(mapName.value)" placeholder="Map Name"> 
-      </mat-form-field>
-      <mat-slide-toggle (change)="togglePublic($event)" [checked]="this.mapComponent.currentMap.isPublic">Public</mat-slide-toggle>
-    </div>
-    <mat-card-subtitle></mat-card-subtitle>
-  </mat-card-header>
+
   <mat-card-content>
+
+      <mat-grid-list cols="3" rowHeight="60px">
+          <mat-grid-tile >
+            <div *ngIf="mapComponent.currentMap != null">
+      
+              <mat-card-title style="font-weight: bold; font-size: 20px" (click)="editTitle()" *ngIf="!titleEditable"> Map Name: {{ mapComponent.currentMap.title }}</mat-card-title>
+                  <mat-form-field *ngIf="titleEditable">
+                      <input #mapName matInput (keyup.enter)="changeTitle(mapName.value)" placeholder="Map Name"> 
+              </mat-form-field>
+            </div>
+        
+          </mat-grid-tile>
+          <mat-grid-tile >
+            <mat-slide-toggle (change)="togglePublic($event)" style="font-size: 20px" [checked]="this.mapComponent.currentMap.isPublic">Public</mat-slide-toggle>
+  
+          </mat-grid-tile>  
+
+          <mat-grid-tile>
+              <button mat-raised-button color="primary" (click)="saveChanges($event)">SAVE</button>
+          </mat-grid-tile>
+
+
+      </mat-grid-list>
+  
   <!--<img mat-card-image src="https://loiane.com/images/tags/angular.svg" height="300px">-->
       <div flex layout="row">
          <mat-card-content style="border-color: darkgray" flex>
-            <map></map>
+          <br> 
+          <map></map>
          </mat-card-content>
       </div>  
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="saveChanges($event)">SAVE</button>
+          <button mat-raised-button color="warn" (click)="deleteMap($event)">DELETE</button>
+
   </mat-card-actions>
 </mat-card>

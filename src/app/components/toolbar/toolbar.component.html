@@ -3,7 +3,6 @@
   <span>AR Maps Editor</span>
   <span class="fill-toolbar"></span>
   <span>
-  <!-- <button mat-raised-button color="primary" routerLink="/settings"> My Account </button> -->
   <div *ngIf="!userLoggedIn()">
     <button mat-raised-button color="primary" (click)="login($event)"> Login </button>
     <button mat-raised-button color="primary" (click)="register($event)"> Register </button>

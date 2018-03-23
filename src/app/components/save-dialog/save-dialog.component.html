@@ -1,8 +1,8 @@
 <!--<div class="mat-dialog-container">-->
-<h2 mat-dialog-title>Save Changes?</h2>
+<h2 mat-dialog-title>{{data.title}}</h2>
 <h3 mat-dialog-title>{{data.text}}</h3>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true">Save</button>
+  <button mat-button [mat-dialog-close]="true">{{data.action}}</button>
 </mat-dialog-actions>
 <!--</div>-->

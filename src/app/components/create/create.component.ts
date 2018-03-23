@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapComponent} from '../../map/map.component';
-import { POIListComponent} from '../../poi-list/poi-list.component';
+import { MapComponent} from '../map/map.component';
+import { POIListComponent} from '../poi-list/poi-list.component';
 import { NavigationEnd, Event, Router, ActivatedRoute } from '@angular/router';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 
